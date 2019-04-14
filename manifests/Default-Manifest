@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aowr-member-service
+  labels:
+    app: aowr-member-service
+  namespace: sanluna-aowr-api
+spec:
+  selector:
+    matchLabels:
+      app: aowr-member-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aowr-member-service
+    spec:
+      containers:
+      - name: aowr-member-service
+        image: eu.gcr.io/sanluna-aowr-92/aowr-member-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 18100
+        readinessProbe:
+          httpGet:
+            path: /memberservice/status/health
+            port: 18100
+            httpHeaders:
+            - name: Content-Type
+              value: application/json
+            - name: Accept
+              value: application/json
+          periodSeconds: 8
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 6
+          initialDelaySeconds: 20
+        livenessProbe:
+          httpGet:
+            path: /memberservice/status/health
+            port: 18100
+            httpHeaders:
+            - name: Content-Type
+              value: application/json
+            - name: Accept
+              value: application/json
+          periodSeconds: 4
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 6
+          initialDelaySeconds: 20
+        env:
+        - name: JAVA_OPTS
+          value: -Xms128m -Xmx128m
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            cpu: 150m
+            memory: 256Mi
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aowr-member-service
+  namespace: sanluna-aowr-api
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: aowr-member-service
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: aowr-member-service
+  labels:
+    app: aowr-member-service
+    service: aowr-member-service
+  namespace: sanluna-aowr-api
+spec:
+  type: NodePort
+  selector:
+    app: aowr-member-service
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 18100
+---
+# -- ROUTING -- #
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: aowr-member-gateway
+  namespace: sanluna-aowr-api
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: aowr-member-vservice
+  namespace: sanluna-aowr-api
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - aowr-member-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/memberservice/
+    rewrite:
+      uri: /memberservice/
+    route:
+    - destination:
+        host: aowr-member-service
+        port:
+          number: 80
