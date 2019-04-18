@@ -1,7 +1,7 @@
 FROM eu.gcr.io/sanluna-gwr/maven-base-build:latest as build
 COPY pom.xml /home/app/pom.xml
 COPY ./src /home/app/src/
-RUN mvn -f /home/app/pom.xml package
+RUN mvn -f /home/app/pom.xml package -B
 
 FROM openjdk:8-jre-alpine
 MAINTAINER Alexander_Lundberg_Santos
