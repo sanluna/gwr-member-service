@@ -5,6 +5,9 @@ metadata:
   labels:
     app: aowr-member-service
   namespace: sanluna-aowr-api
+  annotations:
+    moniker.spinnaker.io/stack: member
+    moniker.spinnaker.io/detail: service
 spec:
   selector:
     matchLabels:
@@ -16,9 +19,9 @@ spec:
         app: aowr-member-service
     spec:
       containers:
-      - name: aowr-member-service
-        image: eu.gcr.io/sanluna-aowr-92/aowr-member-service:latest
-        imagePullPolicy: Always
+      - name: master
+        image: eu.gcr.io/sanluna-aowr-92/aowr-member-service
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 18100
         readinessProbe:
@@ -81,6 +84,9 @@ metadata:
     app: aowr-member-service
     service: aowr-member-service
   namespace: sanluna-aowr-api
+  annotations:
+    moniker.spinnaker.io/stack: member
+    moniker.spinnaker.io/detail: service
 spec:
   type: NodePort
   selector:
