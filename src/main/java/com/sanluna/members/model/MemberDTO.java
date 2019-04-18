@@ -1,7 +1,7 @@
-package com.sanluna.gwr.model;
+package com.sanluna.members.model;
 
-import com.sanluna.gwr.model.entity.Member;
 import com.sanluna.commons.model.BaseDTO;
+import com.sanluna.members.model.entity.Member;
 
 import static com.sanluna.commons.util.Converter.toEntity;
 
@@ -9,6 +9,7 @@ public class MemberDTO extends BaseDTO<MemberDTO> {
 
     private String username;
     private String password;
+    private String roles;
 
     public String getUsername() {
         return username;
@@ -28,9 +29,19 @@ public class MemberDTO extends BaseDTO<MemberDTO> {
         return this;
     }
 
+    public String getRoles() {
+        return roles;
+    }
+
+    public MemberDTO setRoles(String roles) {
+        this.roles = roles;
+        return this;
+    }
+
     public Member convertToEntity() {
         return toEntity(this, new Member())
                 .setPassword(this.password)
-                .setUsername(this.username);
+                .setUsername(this.username)
+                .setRoles(this.roles);
     }
 }

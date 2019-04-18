@@ -24,3 +24,19 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: create-drop
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-uri: http://localhost:18000/authentication/oauth/token_key
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApAiHmqMydGV3GosgorAB
+          dX8jlzOVe+xKWQrhQKBkzQRqoMYtUzJkAbeHm4IbG8E3P22NHHW4XW9e5ReDSkqx
+          o1n7g9rI0VGNiUPwIikf6+IhznjctjUaT+wKpU9OCMtAglq78gLhZcRCxXqLpkLE
+          d9NFQPhcqFnKEzdIa8s+zgN/SfsQTmc7AAB5Jq75gjFG4WRc0ijGj7NfeClqWmjL
+          W9J2EcsrmWHfFAlqAzB9Cz/no1ZmF5zBKKXEMlcUn7iM5eQ+qBshnrqUtO44ziX2
+          wEXJKhlLy4W8VwvrnF596w3S94A2TTI+gF4xEg5GjI4hsUQHUmkf0tAeQyYnesNr
+          TwIDAQAB
+          -----END PUBLIC KEY-----

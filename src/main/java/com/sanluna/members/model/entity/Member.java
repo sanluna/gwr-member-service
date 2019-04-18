@@ -1,7 +1,7 @@
-package com.sanluna.gwr.model.entity;
+package com.sanluna.members.model.entity;
 
-import com.sanluna.gwr.model.MemberDTO;
 import com.sanluna.commons.model.entity.BaseEntity;
+import com.sanluna.members.model.MemberDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +17,8 @@ public class Member extends BaseEntity<Member> {
     private String username;
     @Column(name = "password")
     private String password;
+    @Column(name = "roles")
+    private String roles;
 
     public String getUsername() {
         return username;
@@ -36,9 +38,19 @@ public class Member extends BaseEntity<Member> {
         return this;
     }
 
+    public String getRoles() {
+        return roles;
+    }
+
+    public Member setRoles(String roles) {
+        this.roles = roles;
+        return this;
+    }
+
     public MemberDTO convertToDTO() {
         return toDTO(this, new MemberDTO())
                 .setPassword(this.password)
-                .setUsername(this.username);
+                .setUsername(this.username)
+                .setRoles(this.roles);
     }
 }

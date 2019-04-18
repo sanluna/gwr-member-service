@@ -1,8 +1,8 @@
-package com.sanluna.gwr.controller;
+package com.sanluna.members.controller;
 
-import com.sanluna.gwr.model.MemberDTO;
-import com.sanluna.gwr.model.entity.Member;
-import com.sanluna.gwr.service.MemberService;
+import com.sanluna.members.model.MemberDTO;
+import com.sanluna.members.model.entity.Member;
+import com.sanluna.members.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
