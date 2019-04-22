@@ -4,9 +4,20 @@ import com.sanluna.members.model.MemberDTO;
 import com.sanluna.members.model.entity.Member;
 import com.sanluna.members.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.web.bind.annotation.*;
+import sanluna.gwr.security.principal.GWRPrincipal;
+import sanluna.gwr.security.principal.GWRTokenConverter;
+import sanluna.gwr.security.principal.GWRTokenHelper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

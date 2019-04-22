@@ -16,4 +16,5 @@ public class MemberServiceStarter {
         SpringApplication.run(MemberServiceStarter.class, args);
     }
 
+
 }

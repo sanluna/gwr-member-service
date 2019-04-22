@@ -24,23 +24,10 @@
     <dependencies>
         <dependency>
             <groupId>com.sanluna.gwr</groupId>
-            <artifactId>gwr-commons</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sanluna.gwr</groupId>
-            <artifactId>gwr-security</artifactId>
-            <version>LATEST</version>
+            <artifactId>gwr-multitenancy</artifactId>
+            <version>1.0.0.0</version>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>sanluna</id>
-            <name>Nexus Google Cloud</name>
-            <url>http://35.228.210.135:32000/repository/sanluna/</url>
-        </repository>
-    </distributionManagement>
 
     <build>
         <plugins>
