@@ -64,3 +64,4 @@ spring.main.allow-bean-definition-overriding: true
 security.oauth2.tenantclient.access-token-uri: http://localhost:18000/authentication/oauth/token
 security.oauth2.tenantclient.tenantclient-id: client
 security.oauth2.tenantclient.tenantclient-secret: secret
+gwr.multitenancy: true

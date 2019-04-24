@@ -3,10 +3,12 @@ package com.sanluna.members.controller;
 import com.sanluna.members.model.MemberDTO;
 import com.sanluna.members.model.entity.Member;
 import com.sanluna.members.service.MemberService;
+import com.sanluna.multitenancy.TenantContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -29,8 +31,14 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @PostMapping("")
     public MemberDTO save(@RequestBody MemberDTO dto) {
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+        if(TenantContext.getCurrentTenant() != null)
+        dto.setTenant(TenantContext.getCurrentTenant());
         return memberService.save(dto.convertToEntity()).convertToDTO();
     }
 
@@ -46,6 +54,11 @@ public class MemberController {
 
     @GetMapping("search/{username}")
     public MemberDTO getByUsername(@PathVariable("username") String username) {
+        return memberService.findByUsername(username).convertToDTO();
+    }
+
+    @GetMapping("login/{username}")
+    public MemberDTO login(@PathVariable("username") String username) {
         return memberService.findByUsername(username).convertToDTO();
     }
 

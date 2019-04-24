@@ -25,7 +25,13 @@
         <dependency>
             <groupId>com.sanluna.gwr</groupId>
             <artifactId>gwr-multitenancy</artifactId>
-            <version>1.0.0.0</version>
+            <version>1.0.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sanluna.gwr</groupId>
+            <artifactId>gwr-commons</artifactId>
+            <version>1.0.0.3</version>
         </dependency>
     </dependencies>
 

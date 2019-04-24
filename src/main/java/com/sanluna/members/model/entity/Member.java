@@ -19,6 +19,8 @@ public class Member extends BaseEntity<Member> {
     private String password;
     @Column(name = "roles")
     private String roles;
+    @Column(name = "tenant")
+    private String tenant;
 
     public String getUsername() {
         return username;
@@ -47,10 +49,20 @@ public class Member extends BaseEntity<Member> {
         return this;
     }
 
+    public String getTenant() {
+        return tenant;
+    }
+
+    public Member setTenant(String tenant) {
+        this.tenant = tenant;
+        return this;
+    }
+
     public MemberDTO convertToDTO() {
         return toDTO(this, new MemberDTO())
                 .setPassword(this.password)
                 .setUsername(this.username)
-                .setRoles(this.roles);
+                .setRoles(this.roles)
+                .setTenant(this.tenant);
     }
 }

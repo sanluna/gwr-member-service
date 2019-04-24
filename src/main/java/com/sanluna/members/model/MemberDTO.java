@@ -10,6 +10,7 @@ public class MemberDTO extends BaseDTO<MemberDTO> {
     private String username;
     private String password;
     private String roles;
+    private String tenant;
 
     public String getUsername() {
         return username;
@@ -38,10 +39,20 @@ public class MemberDTO extends BaseDTO<MemberDTO> {
         return this;
     }
 
+    public String getTenant() {
+        return tenant;
+    }
+
+    public MemberDTO setTenant(String tenant) {
+        this.tenant = tenant;
+        return this;
+    }
+
     public Member convertToEntity() {
         return toEntity(this, new Member())
                 .setPassword(this.password)
                 .setUsername(this.username)
-                .setRoles(this.roles);
+                .setRoles(this.roles)
+                .setTenant(this.tenant);
     }
 }
