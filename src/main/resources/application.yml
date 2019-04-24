@@ -65,3 +65,13 @@ security.oauth2.tenantclient.access-token-uri: http://localhost:18000/authentica
 security.oauth2.tenantclient.tenantclient-id: client
 security.oauth2.tenantclient.tenantclient-secret: secret
 gwr.multitenancy: true
+---
+spring:
+  profiles: cloud
+security.oauth2.tenantclient.access-token-uri: http://gwr-authentication-service/authentication/oauth/token
+
+gwr:
+  tenant:
+    url: http://gwr-tenant-service/tenantservice/tenants/
+  member:
+    url: http://gwr-member-service/memberservice/members/
