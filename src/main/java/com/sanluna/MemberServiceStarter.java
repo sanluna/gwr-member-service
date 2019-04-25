@@ -23,7 +23,7 @@ public class MemberServiceStarter {
     }
 
     @Configuration
-    public class HealthCheckSecurityConfigurer extends ResourceServerConfigurerAdapter {
+    public class AuthorizationSecurityConfigurer extends ResourceServerConfigurerAdapter {
 
         @Override
         public void configure(HttpSecurity http) throws Exception {

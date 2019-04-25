@@ -1,3 +1,16 @@
+server:
+  port: 18100
+  use-forward-headers: true
+  servlet:
+    context-path: /memberservice
 spring:
   application:
     name: gwr-member-service
+  cloud:
+    config:
+      uri: http://localhost:18001
+
+---
+spring:
+  profiles: cloud
+  cloud.config.uri: http://gwr-config-service
