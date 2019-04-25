@@ -13,4 +13,4 @@ spring:
 ---
 spring:
   profiles: cloud
-  cloud.config.uri: http://gwr-configuration-service:18001
+  cloud.config.uri: http://gwr-configuration-service/configservice
