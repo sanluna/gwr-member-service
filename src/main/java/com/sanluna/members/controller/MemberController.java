@@ -54,11 +54,13 @@ public class MemberController {
 
     @GetMapping("search/{username}")
     public MemberDTO getByUsername(@PathVariable("username") String username) {
+        System.out.println("lookup member with username: " + username);
         return memberService.findByUsername(username).convertToDTO();
     }
 
     @GetMapping("login/{username}")
     public MemberDTO login(@PathVariable("username") String username) {
+        System.out.println("lookup member with username: " + username);
         return memberService.findByUsername(username).convertToDTO();
     }
 
