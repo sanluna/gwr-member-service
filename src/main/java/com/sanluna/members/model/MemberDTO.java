@@ -2,6 +2,7 @@ package com.sanluna.members.model;
 
 import com.sanluna.commons.model.BaseDTO;
 import com.sanluna.members.model.entity.Member;
+import com.sanluna.members.model.entity.Person;
 
 import static com.sanluna.commons.util.Converter.toEntity;
 
@@ -11,6 +12,7 @@ public class MemberDTO extends BaseDTO<MemberDTO> {
     private String password;
     private String roles;
     private String tenant;
+    private Person person;
 
     public String getUsername() {
         return username;

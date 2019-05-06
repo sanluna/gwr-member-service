@@ -1,5 +1,6 @@
 package com.sanluna.members.controller;
 
+import com.sanluna.commons.controller.BaseController;
 import com.sanluna.members.model.PersonDTO;
 import com.sanluna.members.model.entity.Person;
 import com.sanluna.members.service.PersonService;
@@ -13,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "persons", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
-public class PersonController {
+public class PersonController implements BaseController<PersonDTO> {
 
     @Autowired
     private PersonService personService;
@@ -31,6 +32,11 @@ public class PersonController {
     @GetMapping("{id}")
     public PersonDTO getById(@PathVariable("id") String ID) {
         return personService.getById(ID).convertToDTO();
+    }
+
+    @Override
+    public PersonDTO update(PersonDTO dto) {
+        return personService.update(dto.convertToEntity()).convertToDTO();
     }
 
     @DeleteMapping("")

@@ -65,4 +65,12 @@ public class Member extends BaseEntity<Member> {
                 .setRoles(this.roles)
                 .setTenant(this.tenant);
     }
+
+    @Override
+    public Member updateEntity(Member newEntity) {
+        if(newEntity.getUsername() != null) setUsername(newEntity.getUsername());
+        if(newEntity.getRoles() != null) setRoles(newEntity.getRoles());
+        if(newEntity.getTenant() != null) setTenant(newEntity.getTenant());
+        return this;
+    }
 }

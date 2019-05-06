@@ -88,4 +88,14 @@ public class Person extends BaseEntity<Person> {
                 .setPhoneNumber(this.phoneNumber)
                 .setSocialNr(this.socialNr);
     }
+
+    @Override
+    public Person updateEntity(Person newEntity) {
+        if(newEntity.getEmail() != null) setEmail(newEntity.getEmail());
+        if(newEntity.getFirstName() != null) setFirstName(newEntity.getFirstName());
+        if(newEntity.getLastName() != null) setLastName(newEntity.getLastName());
+        if(newEntity.getPhoneNumber() != null) setPhoneNumber(newEntity.getPhoneNumber());
+        if(newEntity.getSocialNr() != null) setSocialNr(newEntity.getSocialNr());
+        return this;
+    }
 }
